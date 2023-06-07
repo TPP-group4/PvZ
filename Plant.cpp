@@ -29,6 +29,16 @@ void Plant::beHealed(const size_t& healPoint)
     this->hp_ += healPoint;
 }
 
+void Plant::beInjured(const size_t& injuryPoint)
+{
+    this->hp_ -= injuryPoint;
+}
+
+Plant::~Plant()
+{
+    
+}
+
 const std::string& Plant::getTypeName() const
 {
     return plantTypeNames[static_cast<int>(this->type_)];
