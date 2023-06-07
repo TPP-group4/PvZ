@@ -31,7 +31,7 @@ class Plant
         size_t hp_;
         const size_t cost_;
         static size_t max_hp_;
-        // static size_t count_of_plant_;
+        static size_t count_of_plant_;
 };
 
 #endif
