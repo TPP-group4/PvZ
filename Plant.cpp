@@ -2,17 +2,26 @@
 
 const std::array<std::string, 5> Plant::plantTypeNames = 
 {
+    "Empty",
     "Hornflower",
     "Bombflower",
     "Coinflower",
     "Healflower"
 };
 
-size_t Plant::max_hp_ = 0;
-size_t Plant::count_of_plant_ = 0;
+// size_t Plant::max_hp_ = 0;
+// size_t Plant::count_of_plant_ = 0;
+
+Plant::Plant() : cost_(0), hp_(0) {}
 
 // manual: Plant plant(50, 75, PlantType::BOMB);
-Plant::Plant(size_t cost, size_t hp, PlantType type) : cost_(cost), hp_(hp), type_(type) {}
+// Plant::Plant(size_t cost, size_t hp, PlantType type) : cost_(cost), hp_(hp), type_(type) {}
+Plant::Plant(const size_t& cost, const size_t& hp) : cost_(cost), hp_(hp) {}
+
+Plant::~Plant()
+{
+    
+}
 
 const int& Plant::getHP() const
 {
@@ -34,12 +43,20 @@ void Plant::beInjured(const size_t& injuryPoint)
     this->hp_ -= injuryPoint;
 }
 
-Plant::~Plant()
+bool Plant::isAlive() const
 {
-    
+    return (this->hp_ > 0);
 }
 
-const std::string& Plant::getTypeName() const
+std::ostream& operator<<(std::ostream& os, const Plant& plant)
 {
-    return plantTypeNames[static_cast<int>(this->type_)];
+    if(plant.isAlive())
+    {
+        os << plant.getTypeName() << " HP: " << plant.getHP();
+    }
+    else
+    {
+        os << "Empty ";
+    }
+    return os;
 }
