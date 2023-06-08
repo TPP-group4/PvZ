@@ -12,17 +12,19 @@
    2. 若所有植物死光, 玩家lose
 
 ## class 設計
-> 當玩家碰到攻擊行植物時, 會印出 Your flower is guarding your land. 
+> 當玩家碰到攻擊行植物時, 會印出 `Your flower is guarding your land. `
 - 植物 (Plant.h)
-  - const int& point(): 植物的血量
-  - const int& cost(): 植物的花費
+  - `const int& getHP()`: 植物的血量
+  - `const int& getCost()`: 植物的花費
   <!-- - const int& countOfPlant(): 植物的數量(死掉+活著的) -->
   <!-- - const int& countOfPlant("TYPE"): -->
   <!-- - const int& countOfExistPlant(): 活著的植物 -->
   <!-- - const int& countOfExistPlant("TYPE"): -->
-  - void beHealed(size_t healPoint): 增加植物的血量
-  - void beInjured(size_t injuryPoint): 減少植物的血量
+  - `void beHealed( healPoint )`: 增加植物的血量
+  - `void beInjured( injuryPoint )`: 減少植物的血量
+  - `bool isAlive()`: 植物還活著嗎?
 - Horn
+  - `int getDamage()`: 帶來的傷害
 - Bomb
 - Coin
 - Heal
