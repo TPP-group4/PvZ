@@ -23,6 +23,7 @@
   - `void beHealed( healPoint )`: 增加植物的血量
   - `void beInjured( injuryPoint )`: 減少植物的血量
   - `bool isAlive()`: 植物還活著嗎?
+  - `ostream& operator<<`: 印出`"<flowertype> HP: <flowerHP>"`
 - Horn
   - `int getDamage()`: 帶來的傷害
 - Bomb
