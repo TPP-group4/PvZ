@@ -12,7 +12,7 @@ class CoinPlant : public Plant
         int visited();
         virtual const std::string& getTypeName() const override
         {
-            return plantTypeNames[static_cast<int>(PlantType::HEAL)];
+            return plantTypeNames[static_cast<int>(PlantType::COIN)];
         }
     private:
         const int& myreward() const;
