@@ -8,11 +8,11 @@
 class BombPlant : public Plant
 {
     public:
-        BombPlant(const size_t& cost, const size_t& hp);
+        BombPlant(const int& cost, const int& hp);
         const int& myDamage() const;
         virtual const std::string& getTypeName() const override
         {
-            return plantTypeNames[static_cast<int>(PlantType::HEAL)];
+            return plantTypeNames[static_cast<int>(PlantType::BOMB)];
         }
     private:
         const int damage_;

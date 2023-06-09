@@ -8,7 +8,7 @@
 class HealPlant : public Plant
 {
     public:
-        HealPlant(const size_t& cost, const size_t& hp, const size_t& healPoint);
+        HealPlant(const int& cost, const int& hp, const int& healPoint);
         const int& myHealPoint() const;
         virtual const std::string& getTypeName() const override
         {

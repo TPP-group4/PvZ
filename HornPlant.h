@@ -8,14 +8,14 @@
 class HornPlant : public Plant
 {
     public:
-        HornPlant(const size_t& cost, const size_t& hp, const size_t& damage);
-        const size_t& getDamage() const;
+        HornPlant(const int& cost, const int& hp, const int& damage);
+        const int& getDamage() const;
         virtual const std::string& getTypeName() const override
         {
             return plantTypeNames[static_cast<int>(PlantType::HORN)];
         }
     private:
-        size_t damage_;
+        int damage_;
 };
 
 #endif
