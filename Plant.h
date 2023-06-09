@@ -25,7 +25,7 @@ class Plant
         void beHealed(const int& healPoint);
         void beInjured(const int& injuryPoint);
         bool isAlive() const;
-        ~Plant();
+        virtual ~Plant();
     // protected:
         // PlantType type_;
         // pure virtual function
