@@ -8,7 +8,7 @@
 class CoinPlant : public Plant
 {
     public:
-        CoinPlant(const size_t& cost, const size_t& hp, const int& reward, const int& visTimes);
+        CoinPlant(const int& cost, const int& hp, const int& reward, const int& visTimes);
         int visited();
         virtual const std::string& getTypeName() const override
         {

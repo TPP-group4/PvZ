@@ -1,6 +1,6 @@
 #include "CoinPlant.h"
 
-CoinPlant::CoinPlant(const size_t& cost, const size_t& hp, const int& reward, const int& visTimes) : Plant(cost, hp), reward_(reward), targetVisTimes_(visTimes), visTimes_(0) {}
+CoinPlant::CoinPlant(const int& cost, const int& hp, const int& reward, const int& visTimes) : Plant(cost, hp), reward_(reward), targetVisTimes_(visTimes), visTimes_(0) {}
 
 const int& CoinPlant::myreward() const
 {

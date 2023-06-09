@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall
 
-OBJFILES = testPlantMain.o Plant.o HornPlant.o BombPlant.o CoinPlant.o
+OBJFILES = testPlantMain.o Plant.o HornPlant.o BombPlant.o CoinPlant.o HealPlant.o
 TARGET = main
 
 all: $(TARGET)
