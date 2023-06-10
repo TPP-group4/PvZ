@@ -4,6 +4,7 @@
 #include <cstdlib>  // For rand and srand
 #include <ctime>    // For time
 
+//For test, 要用品翰的格式 
 class Plant {
 private:
     std::string breed;
@@ -24,6 +25,7 @@ public:
         return health;
     }
 };
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 class Land {
 	public:
