@@ -1,3 +1,6 @@
+#ifndef PLANT_H
+#define PLANT_H
+
 #include <string>
 
 //For test, 要用品翰的格式
@@ -22,4 +25,5 @@ class Plant {
         int health;
 
 };
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////////

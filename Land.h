@@ -1,5 +1,8 @@
-#include "temp_Plant.h"
+#ifndef LAND_H
+#define LAND_H
 
+//class Plant;
+#include "temp_Plant.h"
 class Land {
 	public:
 	    Land();
@@ -9,3 +12,5 @@ class Land {
     private:
     	Plant* plant_;
 };
+
+#endif

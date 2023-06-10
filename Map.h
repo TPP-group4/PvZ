@@ -1,4 +1,7 @@
+#ifndef MAP_H
+#define MAP_H
 #include "Land.h"
+
 #include <vector>
 
 class Map {
@@ -11,3 +14,5 @@ class Map {
     private:
     	std::vector<Land> lands_;
 };
+
+#endif
