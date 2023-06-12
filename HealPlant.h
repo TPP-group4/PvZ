@@ -5,17 +5,27 @@
 #include <string>
 #include "Plant.h"
 
+// HealPlant
 class HealPlant : public Plant
 {
     public:
         HealPlant(const int& cost, const int& hp, const int& healPoint);
-        const int& myHealPoint() const;
         virtual const std::string& getTypeName() const override
         {
             return plantTypeNames[static_cast<int>(PlantType::HEAL)];
         }
+        virtual int meetPlayers() override
+        {
+            return this->healPoint_;
+        }
+        virtual const void showDetail() const
+        {
+            std::cout << this->getTypeName() << " $" << HealPlant::cost_ << " HP:" << HealPlant::maxHP_ << " - gives all your plants " << HealPlant::healPoint_ << " HP back" << std::endl;
+        }
     private:
-        int healPoint_;
+        static int healPoint_;
+        static int cost_;
+        static int maxHP_;
 };
 
 #endif
