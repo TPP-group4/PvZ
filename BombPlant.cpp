@@ -1,8 +1,11 @@
 #include "BombPlant.h"
 
-BombPlant::BombPlant(const int& cost, const int& hp) : Plant(cost, hp), damage_(hp) {}
+int BombPlant::damage_ = 0;
+int BombPlant::cost_ = 0;
 
-const int& BombPlant::myDamage() const
+BombPlant::BombPlant(const int& cost, const int& hp) : Plant(hp) 
 {
-    return this->damage_;
+    BombPlant::damage_ = hp;
+    BombPlant::cost_ = cost;
 }
+// BombPlant end

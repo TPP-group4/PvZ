@@ -1,8 +1,13 @@
 #include "HornPlant.h"
 
-HornPlant::HornPlant(const int& cost, const int& hp, const int& damage) : Plant(cost, hp), damage_(damage) {}
+int HornPlant::damage_ = 0;
+int HornPlant::cost_ = 0;
+int HornPlant::maxHP_ = 0;
 
-const int& HornPlant::getDamage() const
+HornPlant::HornPlant(const int& cost, const int& hp, const int& damage) : Plant(hp)
 {
-    return this->damage_;
+    HornPlant::damage_ = damage;
+    HornPlant::cost_ = cost;
+    HornPlant::maxHP_ = hp;
 }
+// HornPlant end

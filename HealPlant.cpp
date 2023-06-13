@@ -1,8 +1,13 @@
 #include "HealPlant.h"
 
-HealPlant::HealPlant(const int& cost, const int& hp, const int& healPoint) : Plant(cost, hp), healPoint_(healPoint) {}
+int HealPlant::healPoint_ = 0;
+int HealPlant::cost_ = 0;
+int HealPlant::maxHP_ = 0;
 
-const int& HealPlant::myHealPoint() const
+HealPlant::HealPlant(const int& cost, const int& hp, const int& healPoint) : Plant(hp)
 {
-    return this->healPoint_;
+    HealPlant::healPoint_ = healPoint;
+    HealPlant::cost_ = cost;
+    HealPlant::maxHP_ = hp;
 }
+// HealPlant end
