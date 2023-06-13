@@ -10,7 +10,18 @@ int main() {
     Game *gm = Game::getInstance();
     gm->read_file();
     gm->Init();
-    gm->PrintZombieInformations();
+    cin.get();
+    while (1)
+    {
+        gm->printMap();
+        gm->PrintZombieInformations();
+        int option ;
+        cout << "player $150:    Enter your choice (4 to give up, default: 4)...>";
+        cin >> option;
+        gm->plant(option);
+        gm->Turn();
+    }
+    
     
     return 0;
 }

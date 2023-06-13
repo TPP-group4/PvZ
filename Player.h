@@ -1,3 +1,5 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "Map.h"
 class Player {
 	public:
@@ -19,3 +21,4 @@ class Player {
 	    int currentLandIndex_;
 
 };
+#endif
