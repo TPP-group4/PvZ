@@ -22,6 +22,14 @@ class HornPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << HornPlant::cost_ << " HP:" << HornPlant::maxHP_ << " - gives " << HornPlant::damage_ << " damage points" << std::endl;
         }
+        virtual const int getCost() const override
+        {
+            return this->cost_;
+        }
+        virtual const int getMaxHP() const override
+        {
+            return this->maxHP_;
+        }
     private:
         static int damage_;
         static int cost_;
