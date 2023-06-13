@@ -8,6 +8,8 @@
 #include "CoinPlant.h"
 #include "Zombie.h"
 
+#include "Player.h"
+
 #include <vector>
 #include <iostream>
 #include <string>
@@ -26,7 +28,7 @@ private:
     std::map<int, Plant*> INFOTable;
     std::vector <Zombie> zombies;
     static Game *instance;
-
+    Player p;
 public:
    static Game* getInstance()
     {
