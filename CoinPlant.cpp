@@ -1,19 +1,15 @@
 #include "CoinPlant.h"
 
-CoinPlant::CoinPlant(const int& cost, const int& hp, const int& reward, const int& visTimes) : Plant(cost, hp), reward_(reward), targetVisTimes_(visTimes), visTimes_(0) {}
+int CoinPlant::targetVisTimes_ = 0;
+int CoinPlant::reward_ = 0;
+int CoinPlant::cost_ = 0;
+int CoinPlant::maxHP_ = 0;
 
-const int& CoinPlant::myreward() const
+CoinPlant::CoinPlant(const int& cost, const int& hp, const int& reward, const int& tarVisTimes) : Plant(hp), visTimes_(0)
 {
-    return this->reward_;
+    CoinPlant::targetVisTimes_ = tarVisTimes;
+    CoinPlant::reward_ = reward;
+    CoinPlant::cost_ = cost;
+    CoinPlant::maxHP_ = hp;
 }
-
-int CoinPlant::visited()
-{
-    ++this->visTimes_;
-    if(this->visTimes_ == this->targetVisTimes_)
-    {
-        visTimes_ = 0;
-        return this->myreward();
-    }
-    return 0;
-}
+// CoinPlant end

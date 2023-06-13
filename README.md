@@ -12,6 +12,7 @@
    2. 若所有植物死光, 玩家lose
 
 ## class 設計
+> 還無法設計出如果 plant 的種類 != 4種時的解法，利用 map 跟 virtual table 解決
 > 當玩家碰到攻擊行植物時, 會印出 `Your flower is guarding your land. `
 - 植物 (Plant.h)
   - `const int& getHP()`: 植物的血量
