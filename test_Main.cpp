@@ -15,6 +15,7 @@ int main() {
     {
         gm->printMap();
         gm->PrintZombieInformations();
+        gm->PrintPlant();
         int option ;
         cout << "player $150:    Enter your choice (4 to give up, default: 4)...>";
         cin >> option;
