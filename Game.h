@@ -167,8 +167,7 @@ public:
                 }
             }
             ifs.close();
-            // show Plant INFO
-            PrintPlant();
+            // show Plant INF0
         }
     }
 
@@ -184,6 +183,7 @@ public:
         for(int i =0 ; i < zombies.size() ; i++){
             std::cout << "[" << i << "]" << "Damege : " << zombies[i].getHealth() << "HP" << std::endl;
         }
+        std::cout << "===========================================" << std::endl;
     }
 
     void PrintPlant(){
@@ -204,17 +204,27 @@ public:
         {
         case 0:
             m[p.getCurrentLandIndex()] = new CoinPlant(plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::COIN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::COIN)]->rewardPoint(), plantINFOTable[static_cast<int>(PlantType::COIN)]->targetTimes());
+            std::cout << "You have planted Mushroom at land " << p.getCurrentLandIndex() << std::endl;
+            std::cin.get();
             break;
         case 1:
             m[p.getCurrentLandIndex()] = new HornPlant(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HORN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HORN)]->meetZombies());
+            std::cout << "You have planted HornPlant at land " << p.getCurrentLandIndex() << std::endl;
+            std::cin.get();
             break;
         case 2:
             m[p.getCurrentLandIndex()] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
+            std::cout << "You have planted BombPlant at land " << p.getCurrentLandIndex() << std::endl;
+            std::cin.get();
             break;
         case 3:
             m[p.getCurrentLandIndex()] = new HealPlant(plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->healPoint());
+            std::cout << "You have planted HealPlant at land " << p.getCurrentLandIndex() << std::endl;
+            std::cin.get();
             break;
         default:
+            std::cout << "You have skiped the turn" << std::endl;
+            std::cin.get();
             break;
         }
     }

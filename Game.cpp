@@ -37,4 +37,5 @@ void Game::printMap(){
         }
         std::cout << "} "<< *m[i] << std::endl;
     }
+    std::cout << "-----------------------------------------" << std::endl;
 }

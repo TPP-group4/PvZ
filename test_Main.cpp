@@ -8,6 +8,9 @@ int main() {
 
     //Map map;
     Game *gm = Game::getInstance();
+    cout << "-----------------------------" << endl;
+    cout << "|   Plants vs. Zombies      |" << endl;
+    cout << "-----------------------------" << endl;
     gm->read_file();
     gm->Init();
     cin.get();

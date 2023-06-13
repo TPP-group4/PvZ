@@ -21,7 +21,7 @@ void Zombie::move()
     int steps = rand() % 3 + 1;
     int land_size = Game::getInstance()->getMap().getlen();
     currentLandIndex_ = (currentLandIndex_ + steps) % land_size;
-    std::cout << "move" << std::endl;
+    //std::cout << "move" << std::endl;
 }
 
 int Zombie::getCurrentLandIndex() const
