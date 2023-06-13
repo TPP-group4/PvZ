@@ -7,6 +7,7 @@ class Zombie {
 
 	    void decreaseHealth(int amount);
 	    int getHealth() const;
+		void spawn();
 	    void move();
 	    int getCurrentLandIndex() const;
 
