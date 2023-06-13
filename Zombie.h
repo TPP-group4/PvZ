@@ -11,8 +11,21 @@ class Zombie {
 	    void move();
 	    int getCurrentLandIndex() const;
 
+		void updateDeath(){
+			if(health_ < 0)
+				is_dealth = true;
+		}
+
+		const bool is_Death() const {
+			return is_dealth;
+		}
+		const int Damage()const{
+			return 15;
+		}
+
     private:
 	    int health_;
 	    int currentLandIndex_;
+		bool is_dealth = false;
 };
 #endif

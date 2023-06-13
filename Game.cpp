@@ -30,11 +30,12 @@ void Game::printMap(){
             std::cout << " ";
         }
         for(int j =0 ; j < zombies.size() ; j++){
-            if(i==zombies[j].getCurrentLandIndex())
+            if(i==zombies[j].getCurrentLandIndex()&&!zombies[j].is_Death())
                 std::cout << j;
             else
                 std::cout << " ";
         }
         std::cout << "} "<< *m[i] << std::endl;
     }
+    std::cout << "-----------------------------------------" << std::endl;
 }
