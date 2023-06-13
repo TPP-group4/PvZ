@@ -31,6 +31,9 @@ private:
     static Game *instance;
     Player p;
     Map m;
+    bool is_end;
+    bool is_win;
+    bool is_lose;
 public:
    static Game* getInstance()
     {
@@ -46,10 +49,24 @@ public:
         }
     }
 
+    const bool is_Win()const{
+        return is_win;
+    }
+
+    const bool is_End()const{
+        return is_end;
+    }
+
+    const bool is_Lose()const{
+        return is_lose;
+    }
+
 public:
     Game(){};
 
     void Init(){
+        is_end = false;
+
         std::cout << "Number of lands on the map [default = 8] :";
         int lands = 8;
         std::string num_land;
@@ -87,30 +104,7 @@ public:
         std::cout <<"=============================================================================" << std::endl;
 
     }
-    // void processPlayerTurn(int landIndex, Plant* plant) {
-    //     if (plant) {
-    //         map.getLand(landIndex).setPlant(plant);
-    //         player.decreaseMoney(plant->beInjured());
-    //     }
-
-    //     // Check if player has encountered a particular plant twice
-    //     // and increase money if necessary
-
-    //     // Check if player has encountered another particular plant
-    //     // and increase health of all plants on the map if necessary
-    // }
-
-    // void processZombieTurn(int landIndex) {
-    //     Land& land = map.getLand(landIndex);
-
-    //     if (land.hasPlant()) {
-    //         Plant* plant = land.getPlant();
-    //         plant->decreaseHealth(1);
-    //     } else {
-    //         // Zombie attacks the player or performs other actions
-    //     }
-    // }
-
+    
     void read_file(){
 
         std::ifstream ifs;
@@ -181,6 +175,8 @@ public:
     void PrintZombieInformations(){
         std::cout << "Zombie Information :" << std::endl;
         for(int i =0 ; i < zombies.size() ; i++){
+            if(zombies[i].is_Death())
+                continue;
             std::cout << "[" << i << "]" << "Damege : " << zombies[i].getHealth() << "HP" << std::endl;
         }
         std::cout << "===========================================" << std::endl;
@@ -199,28 +195,56 @@ public:
         return m;
     }
 
+    const Player &getPlayer()const{
+        return p;
+    }
+
     void plant(int option){
         switch (option)
         {
         case 0:
-            m[p.getCurrentLandIndex()] = new CoinPlant(plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::COIN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::COIN)]->rewardPoint(), plantINFOTable[static_cast<int>(PlantType::COIN)]->targetTimes());
-            std::cout << "You have planted Mushroom at land " << p.getCurrentLandIndex() << std::endl;
-            std::cin.get();
-            break;
+            if(p.getMoney() >= plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost()){
+                p.decreaseMoney(plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost());
+                m[p.getCurrentLandIndex()] = new CoinPlant(plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::COIN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::COIN)]->rewardPoint(), plantINFOTable[static_cast<int>(PlantType::COIN)]->targetTimes());
+                std::cout << "You have planted Mushroom at land " << p.getCurrentLandIndex() << std::endl;
+            }
+            else{
+                std::cout << "You do not have enough money to plant anything!" << std::endl;
+            }
+                std::cin.get();
+                break;
         case 1:
-            m[p.getCurrentLandIndex()] = new HornPlant(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HORN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HORN)]->meetZombies());
-            std::cout << "You have planted HornPlant at land " << p.getCurrentLandIndex() << std::endl;
-            std::cin.get();
+            if(p.getMoney() >= plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost()){
+                p.decreaseMoney(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost());
+                m[p.getCurrentLandIndex()] = new HornPlant(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HORN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HORN)]->meetZombies());
+                std::cout << "You have planted HornPlant at land " << p.getCurrentLandIndex() << std::endl;
+            }
+            else{
+                std::cout << "You do not have enough money to plant anything!" << std::endl;
+            }
+                std::cin.get();
             break;
         case 2:
-            m[p.getCurrentLandIndex()] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
-            std::cout << "You have planted BombPlant at land " << p.getCurrentLandIndex() << std::endl;
-            std::cin.get();
+            if(p.getMoney() >= plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost()){
+                p.decreaseMoney(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost());
+                m[p.getCurrentLandIndex()] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
+                std::cout << "You have planted BombPlant at land " << p.getCurrentLandIndex() << std::endl;
+            }
+            else{
+                std::cout << "You do not have enough money to plant anything!" << std::endl;
+            }
+                std::cin.get();
             break;
         case 3:
-            m[p.getCurrentLandIndex()] = new HealPlant(plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->healPoint());
-            std::cout << "You have planted HealPlant at land " << p.getCurrentLandIndex() << std::endl;
-            std::cin.get();
+            if(p.getMoney() >= plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost()){
+                p.decreaseMoney(plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost());
+                m[p.getCurrentLandIndex()] = new HealPlant(plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->healPoint());
+                std::cout << "You have planted HealPlant at land " << p.getCurrentLandIndex() << std::endl;
+            }
+            else{
+                std::cout << "You do not have enough money to plant anything!" << std::endl;
+            }
+                std::cin.get();
             break;
         default:
             std::cout << "You have skiped the turn" << std::endl;
@@ -240,9 +264,30 @@ public:
             int heal_point = m[p.getCurrentLandIndex()]->meetPlayers_heal();
             for(int i = 0 ; i < m.getlen() ; ++i ){
                 m[i]->beHealed(heal_point);
+                if(i==z.getCurrentLandIndex()&&m[i]->isAlive()){
+                    m[i]->beInjured(z.Damage());
+                }
             }
+            z.updateDeath();
         }
         m.updatePlayerLoc(p.getCurrentLandIndex());
+
+        is_win = true;
+        for(auto &z : zombies){
+            if(!z.is_Death())
+                is_win = false;
+        }
+        
+        is_lose = true;
+        
+        for(int i = 0; i<m.getlen();++i)
+        {
+            if(m[i]->isAlive())
+                is_lose = false;
+        }
+
+        if(is_win||is_lose)
+            is_end = true;
         return;
     }
 };
