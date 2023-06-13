@@ -14,6 +14,7 @@ enum class PlantType
     COIN, 
     HEAL
 };
+
 class Plant
 {
     public:
@@ -24,21 +25,23 @@ class Plant
         void beHealed(const int& healPoint);
         void beInjured(const int& injuryPoint);
         bool isAlive() const;
-        virtual ~Plant();
+        virtual ~Plant() {};
         // pure virtual function
-        virtual const std::string& getTypeName() const = 0;
-        virtual const void showDetail() const = 0;
+        virtual const std::string& getTypeName() const {return plantTypeNames[static_cast<int>(PlantType::EMPTY)];}
+        virtual const void showDetail() const {return ;}
+        virtual const int getCost() const {return 0;}
+        virtual const int getMaxHP() const {return 0;}
         // virtual function
         // return damage that applied to zombies
-        virtual int meetZombies() const
-        {
-            return 0;
-        }
+        virtual int meetZombies() const {return 0;}
         // return heal or coin point
-        virtual int meetPlayers()
-        {
-            return 0;
-        }
+        virtual int meetPlayers_heal() {return 0;}
+        virtual int meetPlayers_coin() {return 0;}
+        // for Coin
+        virtual int rewardPoint() const {return 0;}
+        virtual int targetTimes() const {return 0;}
+        // for heal
+        virtual int healPoint() const {return 0;}
         static std::array<std::string, 5> plantTypeNames;
     private:
         int hp_;

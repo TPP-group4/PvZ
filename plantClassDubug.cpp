@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <cstdlib>
 
 // Plant class
 enum class PlantType
@@ -26,21 +27,23 @@ class Plant
         void beHealed(const int& healPoint);
         void beInjured(const int& injuryPoint);
         bool isAlive() const;
-        virtual ~Plant();
+        virtual ~Plant() {};
         // pure virtual function
-        virtual const std::string& getTypeName() const = 0;
-        virtual const void showDetail() const = 0;
+        virtual const std::string& getTypeName() const {return plantTypeNames[static_cast<int>(PlantType::EMPTY)];}
+        virtual const void showDetail() const {return ;}
+        virtual const int getCost() const {return 0;}
+        virtual const int getMaxHP() const {return 0;}
         // virtual function
         // return damage that applied to zombies
-        virtual int meetZombies() const
-        {
-            return 0;
-        }
+        virtual int meetZombies() const {return 0;}
         // return heal or coin point
-        virtual int meetPlayers()
-        {
-            return 0;
-        }
+        virtual int meetPlayers_heal() {return 0;}
+        virtual int meetPlayers_coin() {return 0;}
+        // for Coin
+        virtual int rewardPoint() const {return 0;}
+        virtual int targetTimes() const {return 0;}
+        // for heal
+        virtual int healPoint() const {return 0;}
         static std::array<std::string, 5> plantTypeNames;
     private:
         int hp_;
@@ -63,10 +66,10 @@ Plant::Plant() : hp_(0) {}
 // Plant::Plant(int cost, int hp, PlantType type) : cost_(cost), hp_(hp), type_(type) {}
 Plant::Plant(const int& hp) : hp_(hp) {}
 
-Plant::~Plant()
-{
+// Plant::~Plant()
+// {
     
-}
+// }
 
 const int& Plant::getHP() const
 {
@@ -100,7 +103,6 @@ std::ostream& operator<<(std::ostream& os, const Plant& plant)
     }
     return os;
 }
-
 // Plant end
 
 // HealPlant
@@ -112,7 +114,7 @@ class HealPlant : public Plant
         {
             return plantTypeNames[static_cast<int>(PlantType::HEAL)];
         }
-        virtual int meetPlayers() override
+        virtual int meetPlayers_heal() override
         {
             return this->healPoint_;
         }
@@ -120,6 +122,9 @@ class HealPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << HealPlant::cost_ << " HP:" << HealPlant::maxHP_ << " - gives all your plants " << HealPlant::healPoint_ << " HP back" << std::endl;
         }
+        virtual int healPoint() const {std::cout << "|"; return HealPlant::healPoint_;}
+        virtual const int getCost() const {return HealPlant::cost_;}
+        virtual const int getMaxHP() const {return HealPlant::maxHP_;}
     private:
         static int healPoint_;
         static int cost_;
@@ -150,7 +155,7 @@ class CoinPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << CoinPlant::cost_ << " HP:" << CoinPlant::maxHP_ << " - gives $" << CoinPlant::reward_ << " every " << CoinPlant::targetVisTimes_ << " rounds" <<std::endl;
         }
-        virtual int meetPlayers() override
+        virtual int meetPlayers_coin() override
         {
             ++this->visTimes_;
             if(this->visTimes_ == this->targetVisTimes_)
@@ -160,6 +165,10 @@ class CoinPlant : public Plant
             }
             return 0;
         }
+        virtual int rewardPoint() const {return CoinPlant::reward_;}
+        virtual int targetTimes() const {return CoinPlant::targetVisTimes_;}
+        virtual const int getCost() const {return CoinPlant::cost_;}
+        virtual const int getMaxHP() const {return CoinPlant::maxHP_;}
     private:
         static int targetVisTimes_;
         static int reward_;
@@ -198,6 +207,8 @@ class BombPlant : public Plant
         {
             return this->damage_;
         }
+        virtual const int getCost() const {return BombPlant::cost_;}
+        virtual const int getMaxHP() const {return BombPlant::damage_;}
     private:
         static int damage_;
         static int cost_;
@@ -229,6 +240,8 @@ class HornPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << HornPlant::cost_ << " HP:" << HornPlant::maxHP_ << " - gives " << HornPlant::damage_ << " damage points" << std::endl;
         }
+        virtual const int getCost() const {return HornPlant::cost_;}
+        virtual const int getMaxHP() const {return HornPlant::maxHP_;}
     private:
         static int damage_;
         static int cost_;
@@ -245,6 +258,169 @@ HornPlant::HornPlant(const int& cost, const int& hp, const int& damage) : Plant(
     HornPlant::maxHP_ = hp;
 }
 // HornPlant end
+
+// Zombie
+class Map;
+// class Zombie
+// {
+//     public:
+//         Zombie();
+//         // constructer for setup
+//         Zombie(int cnt);
+//         void beInjured(const int& injuryPoint);
+//         const int& attack() const;
+//         const int& getHP() const;
+//         const int& getPos() const;
+//         bool isAlive() const;
+//         friend class Map;
+//     private:
+//         static constexpr int damage_ = 15;
+//         int health_ = 40;
+//         static int totalCNT;
+//         static int currCNT;
+//         int id_ = -1;
+//         int zombie_loc_;
+// };
+
+// int Zombie::totalCNT = 0;
+// int Zombie::currCNT = 0;
+// Zombie::Zombie()
+// {
+//     for(int i = 0; i < Zombie::totalCNT; ++i)
+//     {
+//         this->id_ = i;
+//         this->zombie_loc_ = rand() % Map::map_len_;
+//         Map::board[i] = *this;
+//         std::cout << i << ": " << Map::board[i].getHP();
+//     }
+// }
+
+// Zombie::Zombie(int cnt)
+// {
+//     Zombie::totalCNT = cnt;
+//     Zombie::currCNT = cnt;
+//     for(int i = 0; i < Zombie::totalCNT; ++i)
+//     {
+//         this->id_ = i;
+//         this->zombie_loc_ = rand() % Map::map_len_;
+//         Map::board[i] = *this;
+//         std::cout << i << ": " << Map::board[i].getHP();
+//     }
+// }
+
+// bool Zombie::isAlive() const
+// {
+//     return (this->health_ > 0);
+// }
+
+// const int& Zombie::getPos() const
+// {
+//     return this->zombie_loc_;
+// }
+
+// void Zombie::beInjured(const int& injuryPoint)
+// {
+//     this->health_-=injuryPoint;
+//     if(!(this->isAlive()))
+//     {
+//         --Zombie::currCNT;
+//     }
+// }
+// const int& Zombie::attack() const
+// {
+//     return Zombie::damage_;
+// }
+// const int& Zombie::getHP() const
+// {
+//     return this->health_;
+// }
+// // Zombie end
+
+// map 
+class Player;
+
+class Map
+{
+    public:
+        Map(int len = 8);
+        ~Map();
+        Plant*& operator[] (int idx)
+        {
+            return maps[idx];
+        }
+        void erease(int idx)
+        {
+            maps.erase(idx);
+            maps[idx] = new Plant;
+        }
+        void printMap();
+        const int& getlen() {return map_len_;}
+        friend class Player;
+        friend class Zombie;
+    private:
+        std::map<int, Plant*> maps;
+        // static std::map<int, Zombie> board;
+        static int map_len_;
+        int playerLoc_;
+};
+
+int Map::map_len_ = 0;
+Map::Map(int len) 
+{
+    Map::map_len_ = len;
+    for(int i = 0; i < Map::map_len_; ++i)
+    {
+        maps[i] = new Plant;
+    }
+    playerLoc_ = 0;
+}
+
+Map::~Map()
+{
+    maps.clear();
+}
+void Map::printMap()
+{
+    for(int i = 0; i < this->map_len_; ++i)
+    {
+        std::cout << "[" << i << "]{";
+        if(i == this->playerLoc_)
+        {
+            std::cout << "*";
+        }
+        else
+        {
+            std::cout << " ";
+        }
+        std::cout << "} "<< *maps[i] << std::endl;
+    }
+}
+// map end
+
+// player
+class Player
+{
+    public:
+        Player();
+        void increaseMoney(const int& reward);
+        void decreaseMoney(const int& spend);
+        void move(Map& tmp)
+        {
+            int steps = rand() % 6 + 1;     // Randomly generate steps between 1 and 6
+            tmp.playerLoc_ = (tmp.playerLoc_+steps) % tmp.map_len_;
+        }
+    private:
+        int money_;
+};
+void Player::increaseMoney(const int& reward)
+{
+    this->money_ += reward;
+}
+void Player::decreaseMoney(const int& spend)
+{
+    this->money_ -= spend;
+}
+// Player end
 
 // game flow start
 int main()
@@ -317,4 +493,10 @@ int main()
         }
     }
     // read plant detail end
+
+    Map grid;
+    grid[0] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
+    std::cout << grid[0]->meetPlayers_heal() << std::endl;
+    grid[0]->beInjured(grid[0]->getHP());
+    grid.printMap();
 }

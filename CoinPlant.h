@@ -18,7 +18,7 @@ class CoinPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << CoinPlant::cost_ << " HP:" << CoinPlant::maxHP_ << " - gives $" << CoinPlant::reward_ << " every " << CoinPlant::targetVisTimes_ << " rounds" <<std::endl;
         }
-        virtual int meetPlayers() override
+        virtual int meetPlayers_coin() override
         {
             ++this->visTimes_;
             if(this->visTimes_ == this->targetVisTimes_)
@@ -28,6 +28,10 @@ class CoinPlant : public Plant
             }
             return 0;
         }
+        virtual int rewardPoint() const {return CoinPlant::reward_;}
+        virtual int targetTimes() const {return CoinPlant::targetVisTimes_;}
+        virtual const int getCost() const {return CoinPlant::cost_;}
+        virtual const int getMaxHP() const {return CoinPlant::maxHP_;}
     private:
         static int targetVisTimes_;
         static int reward_;

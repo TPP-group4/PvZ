@@ -15,10 +15,10 @@ Plant::Plant() : hp_(0) {}
 // Plant::Plant(int cost, int hp, PlantType type) : cost_(cost), hp_(hp), type_(type) {}
 Plant::Plant(const int& hp) : hp_(hp) {}
 
-Plant::~Plant()
-{
+// Plant::~Plant()
+// {
     
-}
+// }
 
 const int& Plant::getHP() const
 {
@@ -52,5 +52,4 @@ std::ostream& operator<<(std::ostream& os, const Plant& plant)
     }
     return os;
 }
-
 // Plant end

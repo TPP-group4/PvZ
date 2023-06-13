@@ -22,6 +22,8 @@ class BombPlant : public Plant
         {
             return this->damage_;
         }
+        virtual const int getCost() const {return BombPlant::cost_;}
+        virtual const int getMaxHP() const {return BombPlant::damage_;}
     private:
         static int damage_;
         static int cost_;
