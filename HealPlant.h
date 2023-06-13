@@ -22,9 +22,9 @@ class HealPlant : public Plant
         {
             std::cout << this->getTypeName() << " $" << HealPlant::cost_ << " HP:" << HealPlant::maxHP_ << " - gives all your plants " << HealPlant::healPoint_ << " HP back" << std::endl;
         }
-        virtual int healPoint() const {std::cout << "|"; return HealPlant::healPoint_;}
-        virtual const int getCost() const {return HealPlant::cost_;}
-        virtual const int getMaxHP() const {return HealPlant::maxHP_;}
+        virtual int healPoint() const override{std::cout << "|"; return HealPlant::healPoint_;}
+        virtual const int getCost() const override {return HealPlant::cost_;}
+        virtual const int getMaxHP() const override {return HealPlant::maxHP_;}
     private:
         static int healPoint_;
         static int cost_;
