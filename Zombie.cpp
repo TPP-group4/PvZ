@@ -15,12 +15,12 @@ int Zombie::getHealth() const
     return health_;
 }
 
-void Zombie::move( const Map map)
-{
-    int steps = rand() % 3 + 1;
-    int land_size = map.getNumLands();
-    currentLandIndex_ = (currentLandIndex_ + steps) % land_size;
-}
+// void Zombie::move( const Map map)
+// {
+//     // int steps = rand() % 3 + 1;
+//     // int land_size = map.getNumLands();
+//     // currentLandIndex_ = (currentLandIndex_ + steps) % land_size;
+// }
 
 int Zombie::getCurrentLandIndex() const
 {

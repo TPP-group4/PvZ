@@ -2,7 +2,6 @@
 #define LAND_H
 
 //class Plant;
-#include "temp_Plant.h"
 class Land {
 	public:
 	    Land();

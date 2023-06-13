@@ -8,14 +8,6 @@
 #include <cstdlib>
 
 // Plant class
-enum class PlantType
-{
-    EMPTY = 0,
-    HORN, 
-    BOMB, 
-    COIN, 
-    HEAL
-};
 
 class Plant
 {
