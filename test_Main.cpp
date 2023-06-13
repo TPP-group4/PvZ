@@ -17,7 +17,14 @@ int main() {
         gm->PrintZombieInformations();
         int option ;
         cout << "player $150:    Enter your choice (4 to give up, default: 4)...>";
-        cin >> option;
+
+        if (std::cin.peek() == '\n') {
+            option = 4;
+            std::cin.ignore();  // 忽略换行符
+        } 
+        else {
+            std::cin >> option;
+        }
         gm->plant(option);
         gm->Turn();
     }
