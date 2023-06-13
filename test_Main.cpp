@@ -33,7 +33,7 @@ int main() {
         gm->Turn();
     }
     if(gm->is_Win())
-        cout << "PLANT Win" << endl;
+        cout << "Congratulations! You have killed all zombies!" << endl;
     else{
         cout << "PLANT Lose" << endl;
     }
