@@ -152,11 +152,7 @@ public:
             }
             ifs.close();
             // show Plant INFO
-            for(const auto& it : INFOTable)
-            {
-                std::cout << "[" << it.first << "] ";
-                it.second->showDetail();
-            }
+            PrintPlant();
         }
     }
 
@@ -177,6 +173,15 @@ public:
         for(int i =0 ; i < zombies.size() ; i++){
             std::cout << "[" << i << "]" << "Damege : " << zombies[i].getHealth() << "HP" << std::endl;
         }
+    }
+
+    void PrintPlant(){
+        for(const auto& it : INFOTable)
+        {
+            std::cout << "[" << it.first << "] ";
+            it.second->showDetail();
+        }
+        return;
     }
 
 };
