@@ -14,5 +14,6 @@ class Zombie {
     private:
 	    int health_;
 	    int currentLandIndex_;
+		bool isdead;
 };
 #endif

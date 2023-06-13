@@ -1,4 +1,4 @@
-//測試用的class, 阿ㄨㄣˊ你加油參考一下
+//測試用的class, 阿ㄨㄣˊ你加油參考一下  我不行
 #ifndef GAME_H
 #define GAME_H
 #include "Plant.h"
@@ -20,7 +20,7 @@
 #include <sstream>
 #include <map>
 #include <cstdlib>
-
+#include <iomanip>
 
 class Game {
 private:
@@ -182,7 +182,12 @@ public:
     void PrintZombieInformations(){
         std::cout << "Zombie Information :" << std::endl;
         for(int i =0 ; i < zombies.size() ; i++){
-            std::cout << "[" << i << "]" << "Damege : " << zombies[i].getHealth() << "HP" << std::endl;
+            std::cout << "[" << i << "]" << "Damege : " << std::setw(2) << zombies[i].getHealth() << " HP:" ;
+            for(int numstar = 0; numstar < zombies[i].getHealth(); ++numstar)
+            {
+                std::cout << "*" ;
+            }
+            std::cout << std::endl;
         }
     }
 
