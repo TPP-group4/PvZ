@@ -9,6 +9,7 @@
 #include "Zombie.h"
 
 #include "Player.h"
+#include "Map.h"
 
 #include <vector>
 #include <iostream>
@@ -29,6 +30,7 @@ private:
     std::vector <Zombie> zombies;
     static Game *instance;
     Player p;
+    Map m;
 public:
    static Game* getInstance()
     {
@@ -48,9 +50,20 @@ public:
     Game(){};
 
     void Init(){
-        std::cout << "Number of zombies on the map [default = 8]: ";
+        std::cout << "Number of lands on the map [default = 8] :";
+        int lands = 8;
+        std::string num_land;
+        std::getline( std::cin, num_land );
+        if ( !num_land.empty() ) {
+            std::istringstream stream( num_land );
+            stream >> lands;
+        }
+        m.Init(lands);
 
-        int number = 8;
+
+        std::cout << "Number of zombies on the map [default = 3]: ";
+
+        int number = 3;
         std::string input;
         std::getline( std::cin, input );
         if ( !input.empty() ) {
@@ -72,6 +85,7 @@ public:
         std::cout <<"How to lose:" << std::endl;
         std::cout <<"All plants are dead." << std::endl;
         std::cout <<"=============================================================================" << std::endl;
+
     }
     // void processPlayerTurn(int landIndex, Plant* plant) {
     //     if (plant) {
@@ -158,13 +172,7 @@ public:
         }
     }
 
-    void printMap(){
-        // Map grid;
-        // grid[0] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
-        // std::cout << grid[0]->meetPlayers_heal() << std::endl;
-        // grid[0]->beInjured(grid[0]->getHP());
-        // grid.printMap();
-    }
+    void printMap();
 
     void AddZombies(Zombie z){
         zombies.push_back(z);
@@ -172,6 +180,7 @@ public:
     }
     
     void PrintZombieInformations(){
+        std::cout << "Zombie Information :" << std::endl;
         for(int i =0 ; i < zombies.size() ; i++){
             std::cout << "[" << i << "]" << "Damege : " << zombies[i].getHealth() << "HP" << std::endl;
         }
@@ -186,8 +195,40 @@ public:
         return;
     }
 
+    const Map &getMap()const{
+        return m;
+    }
+
+    void plant(int option){
+        switch (option)
+        {
+        case 0:
+            m[p.getCurrentLandIndex()] = new CoinPlant(plantINFOTable[static_cast<int>(PlantType::COIN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::COIN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::COIN)]->rewardPoint(), plantINFOTable[static_cast<int>(PlantType::COIN)]->targetTimes());
+            break;
+        case 1:
+            m[p.getCurrentLandIndex()] = new HornPlant(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HORN)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HORN)]->meetZombies());
+            break;
+        case 2:
+            m[p.getCurrentLandIndex()] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
+            break;
+        case 3:
+            m[p.getCurrentLandIndex()] = new HealPlant(plantINFOTable[static_cast<int>(PlantType::HEAL)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->getMaxHP(), plantINFOTable[static_cast<int>(PlantType::HEAL)]->healPoint());
+            break;
+        default:
+            break;
+        }
+    }
+    
+    void Turn(){
+        p.move();
+        for(Zombie &z : zombies){
+            z.move();
+            printMap();
+        }
+        m.updatePlayerLoc(p.getCurrentLandIndex());
+        return;
+    }
 };
-Game* Game::instance = nullptr;
 
 #endif
 ////////////////////////////////////////////////////////////////////////////////

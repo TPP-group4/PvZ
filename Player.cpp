@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Game.h"
 
 #include <cstdlib>  // For rand and srand
 
@@ -22,9 +23,9 @@ int Player::getMoney() const
 
 void Player::move()
 {
-    // int steps = rand() % 6 + 1;  // Randomly generate steps between 1 and 6
-    // int land_size = map.getNumLands();
-    // currentLandIndex_ = (currentLandIndex_ + steps) % land_size;  // Assuming 5 lands in the map
+    int steps = rand() % 6 + 1;  // Randomly generate steps between 1 and 6
+    int land_size = Game::getInstance()->getMap().getlen();
+    currentLandIndex_ = (currentLandIndex_ + steps) % land_size;  // Assuming 5 lands in the map
 }
 
 int Player::getCurrentLandIndex() const
