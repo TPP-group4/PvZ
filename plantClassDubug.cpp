@@ -8,7 +8,15 @@
 #include <cstdlib>
 
 // Plant class
-
+// Plant class
+enum class PlantType
+{
+    EMPTY = 0,
+    HORN, 
+    BOMB, 
+    COIN, 
+    HEAL
+};
 class Plant
 {
     public:
@@ -452,6 +460,7 @@ int main()
                     ss >> name;
                     Plant::plantTypeNames[static_cast<int>(PlantType::HORN)] = name;
                     ss >> type >> cost >> hp >> damagePoint;
+                    std::cout << cost << hp << damagePoint;
                     // call HornPlant's constructer
                     plantINFOTable[static_cast<int>(PlantType::HORN)] = new HornPlant(cost, hp, damagePoint);
                     INFOTable[mapCount++] = new HornPlant(cost, hp, damagePoint);
@@ -487,7 +496,7 @@ int main()
     // read plant detail end
 
     Map grid;
-    grid[0] = new BombPlant(plantINFOTable[static_cast<int>(PlantType::BOMB)]->getCost(), plantINFOTable[static_cast<int>(PlantType::BOMB)]->getMaxHP());
+    // grid[0] = new HornPlant(plantINFOTable[static_cast<int>(PlantType::HORN)]->getCost(), plantINFOTable[static_cast<int>(PlantType::HORN)]->getMaxHP());
     std::cout << grid[0]->meetPlayers_heal() << std::endl;
     grid[0]->beInjured(grid[0]->getHP());
     grid.printMap();
