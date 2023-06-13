@@ -20,11 +20,11 @@ int Player::getMoney() const
     return money_;
 }
 
-void Player::move( const Map map)
+void Player::move()
 {
-    int steps = rand() % 6 + 1;  // Randomly generate steps between 1 and 6
-    int land_size = map.getNumLands();
-    currentLandIndex_ = (currentLandIndex_ + steps) % land_size;  // Assuming 5 lands in the map
+    // int steps = rand() % 6 + 1;  // Randomly generate steps between 1 and 6
+    // int land_size = map.getNumLands();
+    // currentLandIndex_ = (currentLandIndex_ + steps) % land_size;  // Assuming 5 lands in the map
 }
 
 int Player::getCurrentLandIndex() const

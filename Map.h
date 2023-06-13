@@ -5,7 +5,7 @@
 class Map
 {
     public:
-        Map(int len = 8);
+        Map();
         ~Map();
         Plant*& operator[] (int idx)
         {
@@ -23,25 +23,10 @@ class Map
     private:
         std::map<int, Plant*> maps;
         // static std::map<int, Zombie> board;
-        static int map_len_;
+        int map_len_ = 8;
         int playerLoc_;
 };
 
-int Map::map_len_ = 0;
-Map::Map(int len) 
-{
-    Map::map_len_ = len;
-    for(int i = 0; i < Map::map_len_; ++i)
-    {
-        maps[i] = new Plant;
-    }
-    playerLoc_ = 0;
-}
-
-Map::~Map()
-{
-    maps.clear();
-}
 // void Map::printMap()
 // {
 //     for(int i = 0; i < this->map_len_; ++i)
