@@ -225,6 +225,12 @@ public:
             z.move();
             std::cin.get();
             printMap();
+            z.decreaseHealth(m[z.getCurrentLandIndex()]->meetZombies());
+            p.increaseMoney(m[p.getCurrentLandIndex()]->meetPlayers_coin());
+            int heal_point = m[p.getCurrentLandIndex()]->meetPlayers_heal();
+            for(int i = 0 ; i < m.getlen() ; ++i ){
+                m[i]->beHealed(heal_point);
+            }
         }
         m.updatePlayerLoc(p.getCurrentLandIndex());
         return;
