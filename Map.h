@@ -5,8 +5,9 @@
 class Map
 {
     public:
-        Map();
+        Map(){}
         ~Map();
+        void Init(int len);
         Plant*& operator[] (int idx)
         {
             return maps[idx];
@@ -16,32 +17,21 @@ class Map
             maps.erase(idx);
             maps[idx] = new Plant;
         }
-       	// void printMap();
-        const int& getlen() {return map_len_;}
+       	void printMap();
+        const int& getlen() const {return map_len_;}
         friend class Player;
         friend class Zombie;
+    public:
+        void updatePlayerLoc(int p){
+            playerLoc_ = p;
+        }
+        const int getPlayerLoc()const{
+            return playerLoc_;
+        }
     private:
         std::map<int, Plant*> maps;
         // static std::map<int, Zombie> board;
         int map_len_ = 8;
         int playerLoc_;
 };
-
-// void Map::printMap()
-// {
-//     for(int i = 0; i < this->map_len_; ++i)
-//     {
-//         std::cout << "[" << i << "]{";
-//         if(i == this->playerLoc_)
-//         {
-//             std::cout << "*";
-//         }
-//         else
-//         {
-//             std::cout << " ";
-//         }
-//         std::cout << "} "<< *maps[i] << std::endl;
-//     }
-// }
-
 #endif
