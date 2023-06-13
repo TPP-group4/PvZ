@@ -10,7 +10,7 @@ int main() {
     Game *gm = Game::getInstance();
     gm->read_file();
     gm->Init();
-    system("pause");
+    cin.get();
     while (1)
     {
         gm->printMap();

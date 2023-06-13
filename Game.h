@@ -223,6 +223,7 @@ public:
         p.move();
         for(Zombie &z : zombies){
             z.move();
+            std::cin.get();
             printMap();
         }
         m.updatePlayerLoc(p.getCurrentLandIndex());
