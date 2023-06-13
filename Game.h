@@ -172,7 +172,7 @@ public:
         return;
     }
     
-    void PrintZombieInformations(){
+    void PrintZombieInformations()const{
         std::cout << "Zombie Information :" << std::endl;
         for(int i =0 ; i < zombies.size() ; i++){
             if(zombies[i].is_Death())
@@ -182,7 +182,7 @@ public:
         std::cout << "===========================================" << std::endl;
     }
 
-    void PrintPlant(){
+    void PrintPlant()const{
         for(const auto& it : INFOTable)
         {
             std::cout << "[" << it.first << "] ";
