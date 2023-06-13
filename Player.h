@@ -1,5 +1,4 @@
 #include "Map.h"
-
 class Player {
 	public:
 		Player();	//default money
@@ -11,7 +10,7 @@ class Player {
 
 	    int getMoney() const;
 
-	    void move( const Map map);
+	    void move();
 
 	    int getCurrentLandIndex() const;
 

@@ -1,5 +1,5 @@
-#include "Map.h"
-
+#ifndef ZOMBIE_H
+#define ZOMBIE_H
 class Zombie {
 	public:
 		Zombie();//default health
@@ -7,10 +7,11 @@ class Zombie {
 
 	    void decreaseHealth(int amount);
 	    int getHealth() const;
-	    void move( const Map map);
+	    //void move( const Map map);
 	    int getCurrentLandIndex() const;
 
     private:
 	    int health_;
 	    int currentLandIndex_;
 };
+#endif

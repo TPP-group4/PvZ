@@ -1,15 +1,16 @@
 #include "Map.h"
-#include <vector>
 
-Map::Map() : lands_(8) {}	//default number of lands
-Map::Map(int numLands) : lands_(numLands) {}	//number of lands is selected
-
-Land& Map::getLand(int index)
+Map::Map() 
 {
-    return lands_[index];
+    Map::map_len_ = 8;
+    for(int i = 0; i < Map::map_len_; ++i)
+    {
+        maps[i] = new Plant;
+    }
+    playerLoc_ = 0;
 }
 
-int Map::getNumLands() const
+Map::~Map()
 {
-    return lands_.size();
+    maps.clear();
 }
